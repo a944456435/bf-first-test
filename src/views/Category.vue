@@ -28,9 +28,7 @@
       </el-table-column>
     </el-table>-->
     {{multipleSelection}}
-    <h2>123456{{multipleSelection}}</h2>
-    {{multipleSelection}}
-    <my-table :table="table" ref="Category_table">
+    <my-table :table="table" ref="Category_table" @foo="bar">
       <template v-slot:table="record">
         <a class="el-icon-delete" @click.prevent="editHandler(record)" /> &nbsp;
         <a class="el-icon-edit-outline" @click.prevent="deletedHandler(record.row)" /> &nbsp;
@@ -98,7 +96,9 @@ export default {
   methods: {
     ...mapMutations("category", ["openDialog", "closeDialog"]),
     ...mapActions("category", ["getInfo", "deletedById"]),
-
+    bar() {
+      this.multipleSelection = this.$refs.Category_table.checkList;
+    },
     handleSizeChange(val) {
       window.console.log(`每页 ${val} 条`);
     },
@@ -152,6 +152,9 @@ export default {
     this.multipleSelection = this.$refs.Category_table.checkList;
 
     window.console.log(this.$refs.Category_table.checkList, "-------");
+    window.console.log(this.multipleSelection, "--+++-");
+  },
+  updated() {
     window.console.log(this.multipleSelection, "--+++-");
   }
 };

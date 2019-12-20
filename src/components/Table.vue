@@ -30,8 +30,13 @@
 export default {
   data() {
     return {
-      checkList: [1, 2]
+      checkList: []
     };
+  },
+  watch: {
+    checkList: function() {
+      this.$emit("foo");
+    }
   },
   props: {
     table: { type: Object }
