@@ -1,37 +1,53 @@
 <template>
-  <div>
-    <el-table :data="table.tableData" style="width: 100%">
-      <div v-for="item in table.header" :key="item.prop">
-        <!-- 勾选栏 -->
-        <el-table-column type="selection" :width="item.width" v-if="item.prop == 'selection'"></el-table-column>
-        <!-- 普通栏 -->
-        <el-table-column :prop="item.prop" :label="item.label" :width="item.width" align="center"></el-table-column>
-      </div>
-      <!-- 操作栏 -->
-      <el-table-column v-if="table.option" label="操作" :width="table.option.width" align="center">
-        <slot name="table"></slot>
-      </el-table-column>
-    </el-table>
-  </div>
+  <el-table
+    ref="multipleTable"
+    :data="table.tableData"
+    style="width: 100%"
+    @selection-change="handleSelectionChange"
+  >
+    <el-table-column type="selection" width="55"></el-table-column>
+    <el-table-column
+      v-for="(item, index) in table.header"
+      :key="index"
+      :prop="item.prop"
+      :width="item.width"
+      :label="item.label"
+      :type="item.prop === 'selection' ? 'selection' : undefined"
+    >
+      <template slot-scope="props">
+        <slot v-if="item.prop == 'option'" name="table" v-bind:record="props.row"></slot>
+        <span v-else-if="item.prop == 'selection'">
+          <el-checkbox-group v-model="checkList">
+            <el-checkbox :value="props.row.id" :label="props.row.id"></el-checkbox>
+          </el-checkbox-group>
+        </span>
+        <span v-else>{{ props.row[item.prop] }}</span>
+      </template>
+    </el-table-column>
+  </el-table>
 </template>
 <script>
 export default {
   data() {
-    return {};
+    return {
+      checkList: [1, 2]
+    };
   },
   props: {
-    // //是否可选
-    // selection: { default: "selection" },
-    // //是否居中
-    // // isCenter: { default: false, type: Boolean },
-    // //表单数据
-    // tableData: { require: true, type: Array },
-    // //表头配置
-    // tableCol: { type: Array }
     table: { type: Object }
   },
   methods: {
-    handleSelectionChange() {}
+    // handleSelection(table) {
+    //   var len = table.tableData.length;
+    //   if (this.checkList.length !== len) {
+    //     this.checkList = table.tableData.map(item => item.id);
+    //   } else {
+    //     this.checkList = [];
+    //   }
+    // }
+    handleSelectionChange(val) {
+      this.checkList = val.map(item => item.id);
+    }
   }
 };
 </script>

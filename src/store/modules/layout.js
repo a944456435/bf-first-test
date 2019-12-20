@@ -37,7 +37,6 @@ export default {
         content: "首页大屏"
       }
     ]
-    // tabIndex: "/category"
   },
   getters: {},
   mutations: {

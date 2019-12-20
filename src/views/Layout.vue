@@ -113,7 +113,7 @@ export default {
     };
   },
   computed: {
-    ...mapState("layout", ["navigations", "showTabs", "tabIndex"])
+    ...mapState("layout", ["navigations", "showTabs"])
   },
   methods: {
     ...mapMutations("layout", ["refreshAddTab", "refreshRemoveTab"]),
