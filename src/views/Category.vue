@@ -27,7 +27,7 @@
         </template>
       </el-table-column>
     </el-table>-->
-    {{multipleSelection}}
+    勾选：{{multipleSelection}}
     <my-table :table="table" ref="Category_table" @foo="bar">
       <template v-slot:table="record">
         <a class="el-icon-delete" @click.prevent="editHandler(record)" /> &nbsp;
@@ -150,13 +150,8 @@ export default {
   },
   mounted() {
     this.multipleSelection = this.$refs.Category_table.checkList;
-
-    window.console.log(this.$refs.Category_table.checkList, "-------");
-    window.console.log(this.multipleSelection, "--+++-");
   },
-  updated() {
-    window.console.log(this.multipleSelection, "--+++-");
-  }
+  updated() {}
 };
 </script>
 <style>

@@ -7,29 +7,29 @@ export default {
       tableData: [],
       header: [
         {
+          prop: "selection",
+          width: "50"
+        },
+        {
           prop: "id",
           label: "编号",
           width: "50"
         },
         {
           prop: "name",
-          label: "英雄",
-          width: "180"
+          label: "英雄"
         },
         {
           prop: "price",
-          label: "价格",
-          width: "180"
+          label: "价格"
         },
         {
           prop: "occupation",
-          label: "定位",
-          width: "180"
+          label: "定位"
         },
         {
           prop: "state",
-          label: "状态",
-          width: "180"
+          label: "状态"
         },
         {
           prop: "option",
